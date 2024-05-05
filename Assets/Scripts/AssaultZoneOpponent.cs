@@ -7,13 +7,11 @@ using UnityEngine.UI;
 
 public class AssaultZoneOpponent : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Player Owner { get; set; }
 
     private void Awake()
     {
     }
-    // Start is called before the first frame update
     void Start()
     {
         Owner = Gwent.Player2;
@@ -21,10 +19,9 @@ public class AssaultZoneOpponent : MonoBehaviour
 
     }
 
-    // Update is called once per frame
 
     private void OnMouseDown()
     {
-        Utility.Invocation(Owner, gameObject, Types.Assault);
+        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.Assault, 10, UltimateInvocation.AssaultZone));
     }
 }

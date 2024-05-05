@@ -9,10 +9,10 @@ public class Card : ScriptableObject
     public int Atk;
     public string Name;
     public List<Types> Type;
+    public Effects Effect;
     public bool IsPlayer1;
+    public bool IsHero;
     public Player Owner;
-
-    // Update is called once per frame
 
 }
 
@@ -25,4 +25,29 @@ public enum Types
     SpecialRange,
     SpecialAssault,
     Weather,
+}
+public enum Effects
+{
+    None,
+    SetCardSpecialInOwnRow,
+    SetWeather,
+    EliminateBiggestAtkCard,
+    EliminateLeastAtkCard,
+    Draw,
+    AtkUpByEqualsNames,
+    ClearRowLessUnit,
+    BalanceAtkField,
+    Decoy,
+    WeatherOff,
+    DestroyCard,
+    Invocation,
+    InvocationTwo,
+    PowerUpSanctuary,
+    PowerUpEvocation,
+    WeatherRainbow,
+    WeatherStonehedge,
+    WeatherSmoke,
+    WeatherEruption,
+    IncreaseAtkDraco,
+    ActivateTwoSpecial
 }

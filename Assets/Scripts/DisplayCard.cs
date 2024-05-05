@@ -43,5 +43,6 @@ public class DisplayCard : MonoBehaviour
                 card.Owner.SelectedCards.Add(gameObject);
             }
         }
+
     }
 }

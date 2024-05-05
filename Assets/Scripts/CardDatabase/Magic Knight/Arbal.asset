@@ -15,5 +15,6 @@ MonoBehaviour:
   Atk: 7
   Name: 
   Type: 01000000
+  Effect: 1
   IsPlayer1: 0
-  Position: 0
+  IsHero: 0

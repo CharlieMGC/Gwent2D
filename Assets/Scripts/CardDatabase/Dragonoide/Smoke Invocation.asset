@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Atk: 0
   Name: 
-  Type: 000000000100000002000000
+  Type: 00000000
+  Effect: 0
   IsPlayer1: 1
-  Position: 0
+  IsHero: 0

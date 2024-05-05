@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class TotalAtkOpponent : MonoBehaviour
 {
     // Start is called before the first frame update    private int totalAtkLastFrame;
-    public GameObject meleeAtk; // Referencia al GameObject Melee Zone
-    public GameObject rangeAtk; // Referencia al GameObject Melee Zone
-    public GameObject assaultAtk; // Referencia al GameObject Melee Zone
-    public int totalAtkLastFrame; // Referencia al GameObject Melee Zone
+    public GameObject meleeAtk;
+    public GameObject rangeAtk;
+    public GameObject assaultAtk;
+    public int totalAtkLastFrame;
 
     void Start()
     {

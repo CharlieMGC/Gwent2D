@@ -17,6 +17,6 @@ public class SpecialMeleeOpponent : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Utility.Invocation(Owner, gameObject, Types.SpecialMelee, 1);
+        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.SpecialMelee, 1));
     }
 }

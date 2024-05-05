@@ -6,16 +6,28 @@ using UnityEngine.UI;
 
 public class Utility : MonoBehaviour
 {
-    public static void Invocation(Player Owner, GameObject zone, Types type, int amount = 10)
+    public static IEnumerator Invocation(Player Owner, GameObject zone, Types type, int amount = 10, UltimateInvocation ultimateInvocation = UltimateInvocation.SpecialOrClima)
     {
+        /* Debug.Log(zone.GetComponentsInChildren<GameObject>()); */
+
         if (Owner.IsMyTurn && Owner.SelectedCards.Count > 0 && zone.GetComponentsInChildren<DisplayCard>().Count() < amount)
         {
             GameObject cardCurrent = Owner.SelectedCards[Owner.SelectedCards.Count - 1];
             if (cardCurrent != null && cardCurrent.GetComponent<DisplayCard>().card.Type.Contains(type) && Owner.Hand.GetComponentsInChildren<DisplayCard>().Contains(cardCurrent.GetComponent<DisplayCard>()))
             {
+                Owner.LastInvocation = ultimateInvocation;
                 cardCurrent.transform.SetParent(zone.transform, false);
                 Owner.SelectedCards.Clear();
-                Gwent.SwitchTurn();
+                //Gwent.SwitchTurn();
+                yield return new WaitForSeconds(0.5f);
+                Gwent tempGwent = Gwent.gwent.GetComponent<Gwent>();
+                List<Types> typesCard = cardCurrent.GetComponent<DisplayCard>().card.Type;
+                if (typesCard.Contains(Types.SpecialMelee) || typesCard.Contains(Types.SpecialRange) || typesCard.Contains(Types.SpecialAssault))
+                {
+                    Destroy(cardCurrent);
+                }
+                yield return tempGwent.StartCoroutine(tempGwent.ActivateEffect(cardCurrent.GetComponent<DisplayCard>()));
+                Debug.Log(ultimateInvocation);
             }
         }
 
@@ -33,9 +45,13 @@ public class Utility : MonoBehaviour
     }
     public static void ClearChildGameObject(GameObject item)
     {
-        foreach (Transform child in item.GetComponent<Transform>())
+        if (item != null)
         {
-            Destroy(child.gameObject);
+            foreach (Transform child in item.GetComponent<Transform>())
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
+
 }

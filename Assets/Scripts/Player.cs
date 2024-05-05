@@ -16,5 +16,14 @@ public class Player
     public bool EndTurn { get; set; }
     public GameObject CardLeader { get; set; }
     public List<GameObject> SelectedCards { get; set; } = new List<GameObject> { };
+    public UltimateInvocation LastInvocation { get; set; }
 
+}
+
+public enum UltimateInvocation
+{
+    MeleeZone,
+    RangeZone,
+    AssaultZone,
+    SpecialOrClima
 }

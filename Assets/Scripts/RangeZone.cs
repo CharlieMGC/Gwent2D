@@ -16,10 +16,9 @@ public class RangeZone : MonoBehaviour
 
     }
 
-    // Update is called once per frame
 
     private void OnMouseDown()
     {
-        Utility.Invocation(Owner, gameObject, Types.Range);
+        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.Range, 10, UltimateInvocation.RangeZone));
     }
 }

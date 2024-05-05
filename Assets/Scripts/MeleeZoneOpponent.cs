@@ -7,13 +7,11 @@ using UnityEngine.UI;
 
 public class MeleeZoneOpponent : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Player Owner { get; set; }
 
     private void Awake()
     {
     }
-    // Start is called before the first frame update
     void Start()
     {
         Owner = Gwent.Player2;
@@ -25,6 +23,6 @@ public class MeleeZoneOpponent : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Utility.Invocation(Owner, gameObject, Types.Melee);
+        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.Melee, 10, UltimateInvocation.MeleeZone));
     }
 }

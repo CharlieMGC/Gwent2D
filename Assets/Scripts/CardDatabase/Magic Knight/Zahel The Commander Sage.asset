@@ -15,4 +15,6 @@ MonoBehaviour:
   Atk: 0
   Name: 
   Type: 
+  Effect: 21
   IsPlayer1: 0
+  IsHero: 0

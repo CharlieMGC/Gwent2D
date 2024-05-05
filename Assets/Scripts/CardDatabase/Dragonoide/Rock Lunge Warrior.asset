@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4f5bf2500d9d444818d695c7b993cf, type: 3}
   m_Name: Rock Lunge Warrior
   m_EditorClassIdentifier: 
-  Atk: 6
+  Atk: 3
   Name: 
   Type: 0000000002000000
+  Effect: 11
   IsPlayer1: 1
-  Position: 0
+  IsHero: 0

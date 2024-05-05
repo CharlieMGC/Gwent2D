@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AssaultAtkOpponent : MonoBehaviour
 {
     private int totalAtkLastFrame;
-    public GameObject assaultZone; // Referencia al GameObject assault Zone
+    public GameObject assaultZone; 
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class AssaultAtkOpponent : MonoBehaviour
     private int GetTotalAtk()
     {
         int totalAtk = 0;
-        foreach (Transform child in assaultZone.transform) // Buscar en el GameObject assault Zone
+        foreach (Transform child in assaultZone.transform) 
         {
             DisplayCard displayCard = child.GetComponent<DisplayCard>();
             if (displayCard != null)

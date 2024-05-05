@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RangeAtkOpponent : MonoBehaviour
 {
     private int totalAtkLastFrame;
-    public GameObject rangeZone; // Referencia al GameObject range Zone
+    public GameObject rangeZone; 
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class RangeAtkOpponent : MonoBehaviour
     private int GetTotalAtk()
     {
         int totalAtk = 0;
-        foreach (Transform child in rangeZone.transform) // Buscar en el GameObject range Zone
+        foreach (Transform child in rangeZone.transform) 
         {
             DisplayCard displayCard = child.GetComponent<DisplayCard>();
             if (displayCard != null)

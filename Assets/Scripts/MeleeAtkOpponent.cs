@@ -7,10 +7,10 @@ public class MeleeAtkOpponent : MonoBehaviour
 {
     // Start is called before the first frame update
     private int totalAtkLastFrame;
-    public GameObject meleeZone; // Referencia al GameObject Melee Zone
-
+    public GameObject meleeZone; 
     void Start()
     {
+        Gwent.Weather = gameObject;
         totalAtkLastFrame = GetTotalAtk();
     }
 
@@ -27,7 +27,7 @@ public class MeleeAtkOpponent : MonoBehaviour
     private int GetTotalAtk()
     {
         int totalAtk = 0;
-        foreach (Transform child in meleeZone.transform) // Buscar en el GameObject Melee Zone
+        foreach (Transform child in meleeZone.transform) 
         {
             DisplayCard displayCard = child.GetComponent<DisplayCard>();
             if (displayCard != null)

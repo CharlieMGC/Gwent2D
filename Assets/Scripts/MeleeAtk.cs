@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MeleeAtk : MonoBehaviour
 {
     private int totalAtkLastFrame;
-    public GameObject meleeZone; // Referencia al GameObject Melee Zone
+    public GameObject meleeZone; 
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class MeleeAtk : MonoBehaviour
     private int GetTotalAtk()
     {
         int totalAtk = 0;
-        foreach (Transform child in meleeZone.transform) // Buscar en el GameObject Melee Zone
+        foreach (Transform child in meleeZone.transform) 
         {
             DisplayCard displayCard = child.GetComponent<DisplayCard>();
             if (displayCard != null)

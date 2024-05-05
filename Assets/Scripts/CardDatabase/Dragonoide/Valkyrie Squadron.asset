@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4f5bf2500d9d444818d695c7b993cf, type: 3}
   m_Name: Valkyrie Squadron
   m_EditorClassIdentifier: 
-  Atk: 5
+  Atk: 7
   Name: 
   Type: 0000000001000000
+  Effect: 0
   IsPlayer1: 1
-  Position: 1
+  IsHero: 0
