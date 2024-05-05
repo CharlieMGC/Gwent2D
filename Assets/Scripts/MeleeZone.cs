@@ -1,32 +1,41 @@
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MeleeZone : MonoBehaviour
 {
 
     // Start is called before the first frame update
+    private Player Owner { get; set; }
+    /*     private Image image; */
+    private void Awake()
+    {
+    }
+    // Start is called before the first frame update
     void Start()
     {
-        Scope.CardsInMeleeZone = new List<GameObject>();
-        Scope.MeleeZone = gameObject;
+        Owner = Gwent.Player1;
+        Gwent.Player1.MeleeZone = gameObject;
+
+        /*         image = gameObject.GetComponent<Image>(); */
     }
 
-    private void Update()
-    {
-        Scope.MeleeZone.GetComponent<Collider2D>().enabled = Scope.BoxInfoShow ? false : true;
-    }
+    // Update is called once per frame
+
     private void OnMouseDown()
     {
-        if (Scope.ObjectSelect1 != null && Scope.CardsInMeleeZone.Count < 10)
-        {
-            GameObject cardMelee = Scope.ObjectSelect1;
-            cardMelee.transform.SetParent(Scope.MeleeZone.transform, false);
-            Scope.CardsInMeleeZone.Add(cardMelee);
-            Scope.CardsInHand.Remove(cardMelee);
-        }
-
+        Utility.Invocation(Owner, gameObject, Types.Melee);
     }
-}
 
-/* cardMelee.transform.SetParent(MeleeZoneVar.transform, false); */ 
+    /*  private void Update()
+     {
+         if (Owner.SelectedCards != null && Owner.SelectedCards.Count > 0)
+         {
+             image.color = Owner.SelectedCards[Owner.SelectedCards.Count - 1].GetComponent<DisplayCard>().card.Type.Contains(Types.Melee) ? Color.red : Color.RGBToHSV(219, 155, 155);
+         }
+     } */
+}
