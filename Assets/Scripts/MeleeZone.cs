@@ -27,5 +27,4 @@ public class MeleeZone : MonoBehaviour
         StartCoroutine(Utility.Invocation(Owner, gameObject, Types.Melee, 10, UltimateInvocation.MeleeZone));
     }
 
-
 }

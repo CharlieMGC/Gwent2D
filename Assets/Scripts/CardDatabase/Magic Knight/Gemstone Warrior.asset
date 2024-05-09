@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Gemstone Warrior
   m_EditorClassIdentifier: 
   Atk: 3
-  Name: 
+  Name: Gemstone Warrior
   Type: 000000000100000002000000
   Effect: 2
   IsPlayer1: 0
   IsHero: 0
+  Description: Activa una carta de clima.

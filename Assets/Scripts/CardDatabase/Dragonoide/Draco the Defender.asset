@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Draco the Defender
   m_EditorClassIdentifier: 
   Atk: 7
-  Name: 
+  Name: Draco the Defender
   Type: 00000000
   Effect: 0
   IsPlayer1: 1
   IsHero: 0
+  Description: Un feroz guerrero que siempre protege a los suyos.

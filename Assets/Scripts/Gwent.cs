@@ -8,10 +8,13 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Gwent : MonoBehaviour
 {
-    public static GameObject zoneSelected;
+    private GameObject[] zonesSelect;
+    public static List<GameObject> zonesSelectedNegate = new();
+    public static List<GameObject> zonesSelectedInmune = new();
     public static GameObject gwent;
     public static GameObject Weather;
     private static int roundWinPlayer1;
@@ -23,7 +26,6 @@ public class Gwent : MonoBehaviour
     public static Player Player2 { get; set; }
     private static Text totalAtkPlayer2;
     public List<GameObject> CardInDeckPlayer2;
-    public List<GameObject> ResetGameObjects;
     public static Player SelectPlayer;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class Gwent : MonoBehaviour
     {
         gwent = gameObject;
         Weather = GameObject.Find("Weather");
+        zonesSelect = new GameObject[2];
         InitializeGame(Player1, CardInDeckPlayer1);
         InitializeGame(Player2, CardInDeckPlayer2);
         totalAtkPlayer1 = GameObject.Find("Total Text").GetComponent<Text>();
@@ -77,7 +80,6 @@ public class Gwent : MonoBehaviour
 
     private IEnumerator GameFlow()
     {
-
         yield return StartCoroutine(DrawCards(Player1, CardInDeckPlayer1, 10));
         yield return StartCoroutine(DrawCards(Player2, CardInDeckPlayer2, 10));
 
@@ -96,6 +98,8 @@ public class Gwent : MonoBehaviour
         BoxInfo boxInfo = BoxInfo.GetComponent<BoxInfo>();
 
         boxInfo.Show($"Desea enviar cartas al deck {playerName}", "No", "1 carta", "2 cartas");
+
+
         yield return new WaitUntil(() => boxInfo.GetResult() != -1);
         int numCardsToReturn = boxInfo.GetResult();
 
@@ -119,28 +123,50 @@ public class Gwent : MonoBehaviour
 
     public static void SwitchTurn()
     {
+        BoxInfo boxInfo = BoxInfo.GetComponent<BoxInfo>();
+        boxInfo.Hide();
         if (Player1.EndTurn & Player2.EndTurn)
         {
             if (int.Parse(totalAtkPlayer1.GetComponent<Text>().text) > int.Parse(totalAtkPlayer2.GetComponent<Text>().text))
             {
                 Debug.Log("Gana Player 1");
                 Player1.RoundWin++;
+                if (Player1.RoundWin == 2)
+                {
+                    boxInfo.Show("Player 1 ha ganado el juego");
+                }
+                else
+                {
+                    boxInfo.Show("Player 1 ha ganado la ronda");
+                }
             }
             else if (int.Parse(totalAtkPlayer1.GetComponent<Text>().text) < int.Parse(totalAtkPlayer2.GetComponent<Text>().text))
             {
                 Debug.Log("Gana Player 2");
                 Player2.RoundWin++;
+                if (Player2.RoundWin == 2)
+                {
+                    boxInfo.Show("Player 2 ha ganado el juego");
+
+                }
+                else
+                {
+                    boxInfo.Show("Player 2 ha ganado la ronda");
+                }
             }
             else
             {
                 Debug.Log("Empate");
                 Player1.RoundWin++;
                 Player2.RoundWin++;
+                boxInfo.Show("Empate mi loco");
             }
             Player1.IsMyTurn = false;
             Player2.IsMyTurn = false;
-
-            gwent.GetComponent<Gwent>().ResetRound();
+            if (Player1.RoundWin < 2 & Player2.RoundWin < 2)
+            {
+                gwent.GetComponent<Gwent>().ResetRound();
+            }
         }
         else if (Player1.EndTurn)
         {
@@ -169,6 +195,7 @@ public class Gwent : MonoBehaviour
         Utility.ResetPlayer(Player1);
         Utility.ResetPlayer(Player2);
         Utility.ClearChildGameObject(Weather);
+        zonesSelectedNegate.Clear();
 
         SaveRoundWin();
         Player1.IsMyTurn = true;
@@ -222,22 +249,22 @@ public class Gwent : MonoBehaviour
                 Debug.Log("test");
                 break;
             case Effects.WeatherOff:
-                Debug.Log("test");
+                WeatherOffEffect();
                 break;
             case Effects.DestroyCard:
                 Debug.Log("test");
                 break;
             case Effects.Invocation:
-                Debug.Log("test");
+                yield return StartCoroutine(InvocationEffect(Owner));
                 break;
             case Effects.InvocationTwo:
                 Debug.Log("test");
                 break;
             case Effects.PowerUpSanctuary:
-                Debug.Log("test");
+                PowerUpSanctuaryEffect(Owner, 2);
                 break;
             case Effects.PowerUpEvocation:
-                Debug.Log("test");
+                PowerUpSanctuaryEffect(Owner, 4);
                 break;
             case Effects.WeatherRainbow:
                 Debug.Log("test");
@@ -246,7 +273,7 @@ public class Gwent : MonoBehaviour
                 Debug.Log("test");
                 break;
             case Effects.WeatherSmoke:
-                Debug.Log("test");
+                yield return StartCoroutine(ZoneSelectedNegateEffect(boxInfo, Owner));
                 break;
             case Effects.WeatherEruption:
                 Debug.Log("test");
@@ -271,6 +298,32 @@ public class Gwent : MonoBehaviour
         boxInfo.Hide();
         boxInfo.result = -1;
     }
+    private IEnumerator SelectZoneBox(BoxInfo boxInfo)
+    {
+        boxInfo.Show("Seleccione la zona", "Melee", "Range", "Assault");
+        yield return new WaitUntil(() => boxInfo.GetResult() != -1);
+        int tempSelect = boxInfo.GetResult();
+        Debug.Log(tempSelect);
+        switch (tempSelect)
+        {
+            case 0:
+                zonesSelect[0] = Player1.MeleeZone;
+                zonesSelect[1] = Player2.MeleeZone;
+                break;
+            case 1:
+                zonesSelect[0] = Player1.RangeZone;
+                zonesSelect[1] = Player2.RangeZone;
+                break;
+            case 2:
+                zonesSelect[0] = Player1.AssaultZone;
+                zonesSelect[1] = Player2.AssaultZone;
+                break;
+        }
+        boxInfo.Hide();
+        boxInfo.result = -1;
+        Debug.Log(zonesSelect);
+
+    }
     private void DrawEffect(Player Owner)
     {
         if (Owner == Player1)
@@ -294,9 +347,7 @@ public class Gwent : MonoBehaviour
             int cardCount = SelectPlayer.MeleeZone.GetComponentsInChildren<DisplayCard>().Count() + SelectPlayer.RangeZone.GetComponentsInChildren<DisplayCard>().Count() + SelectPlayer.AssaultZone.GetComponentsInChildren<DisplayCard>().Count();
             int average = (int)Math.Round((double)totalAtk / cardCount);
 
-            // Asegurarse de que el promedio sea un número entero positivo
             average = Math.Abs(average);
-            Debug.Log("Wiii eso " + average);
             SetAtkInRow(SelectPlayer.MeleeZone, average);
             SetAtkInRow(SelectPlayer.RangeZone, average);
             SetAtkInRow(SelectPlayer.AssaultZone, average);
@@ -306,7 +357,8 @@ public class Gwent : MonoBehaviour
     {
         foreach (var item in zone.GetComponentsInChildren<DisplayCard>())
         {
-            item.card.Atk = atk;
+            if (!item.card.IsHero  )
+                item.card.Atk = atk;
         }
     }
     private IEnumerator SetWeatherEffect(Player Owner)
@@ -332,41 +384,50 @@ public class Gwent : MonoBehaviour
     }
     private IEnumerator SetCardSpecialInOwnRowEffect(Player Owner)
     {
-        bool ContainSpecial = false;
-        foreach (var item in Owner.Hand.GetComponentsInChildren<DisplayCard>())
-        {
-            if (item.card.Type.Contains(Types.SpecialMelee) || item.card.Type.Contains(Types.SpecialRange) || item.card.Type.Contains(Types.SpecialAssault))
-            {
-                ContainSpecial = true;
-                break;
-            }
-        }
+        bool ContainSpecial = Owner.Hand.GetComponentsInChildren<DisplayCard>().Any(item => item.card.Type.Contains(Types.SpecialMelee) || item.card.Type.Contains(Types.SpecialRange) || item.card.Type.Contains(Types.SpecialAssault));
+
         if (ContainSpecial)
         {
-            Owner.SelectedCards.Clear();
-            switch (Owner.LastInvocation)
+            Dictionary<UltimateInvocation, (string zoneName, Types type)> cardTypeToZoneMap = new Dictionary<UltimateInvocation, (string, Types)>
+        {
+            { UltimateInvocation.MeleeZone, (Player1.IsMyTurn ? "Special Melee" : "Special Melee 2", Types.SpecialMelee) },
+            { UltimateInvocation.RangeZone, (Player1.IsMyTurn ? "Special Range" : "Special Range 2", Types.SpecialRange) },
+            { UltimateInvocation.AssaultZone, (Player1.IsMyTurn ? "Special Assault" : "Special Assault 2", Types.SpecialAssault) }
+        };
+
+            if (cardTypeToZoneMap.ContainsKey(Owner.LastInvocation))
             {
-                case UltimateInvocation.MeleeZone:
-                    yield return new WaitUntil(() => Owner.SelectedCards.Count() > 0 && Owner.SelectedCards[Owner.SelectedCards.Count() - 1].GetComponent<DisplayCard>().card.Type.Contains(Types.SpecialMelee));
-                    zoneSelected = Player1.IsMyTurn ? GameObject.Find("Special Melee") : GameObject.Find("Special Melee 2");
-                    StartCoroutine(Utility.Invocation(Owner, zoneSelected, Types.SpecialMelee, 1));
-                    break;
-                case UltimateInvocation.RangeZone:
-                    yield return new WaitUntil(() => Owner.SelectedCards.Count() > 0 && Owner.SelectedCards[Owner.SelectedCards.Count() - 1].GetComponent<DisplayCard>().card.Type.Contains(Types.SpecialRange));
-                    zoneSelected = Player1.IsMyTurn ? GameObject.Find("Special Range") : GameObject.Find("Special Range 2");
-                    StartCoroutine(Utility.Invocation(Owner, zoneSelected, Types.SpecialRange, 1));
-                    break;
-                case UltimateInvocation.AssaultZone:
-                    yield return new WaitUntil(() => Owner.SelectedCards.Count() > 0 && Owner.SelectedCards[Owner.SelectedCards.Count() - 1].GetComponent<DisplayCard>().card.Type.Contains(Types.SpecialAssault));
-                    zoneSelected = Player1.IsMyTurn ? GameObject.Find("Special Assault") : GameObject.Find("Special Assault 2");
-                    StartCoroutine(Utility.Invocation(Owner, zoneSelected, Types.SpecialAssault, 1));
-                    break;
-                case UltimateInvocation.SpecialOrClima:
-                    break;
+                var (zoneName, type) = cardTypeToZoneMap[Owner.LastInvocation];
+
+                while (Owner.SelectedCards.Count() == 0 || !Owner.SelectedCards.Last().GetComponent<DisplayCard>().card.Type.Contains(type))
+                {
+
+                    Owner.SelectedCards.Clear();
+                    yield return new WaitUntil(() => Owner.SelectedCards.Count() > 0);
+                }
+
+
+                GameObject zoneSelected = GameObject.Find(zoneName);
+                UltimateInvocation Special = UltimateInvocation.Another;
+                switch (Owner.LastInvocation)
+                {
+                    case UltimateInvocation.MeleeZone:
+                        Special = UltimateInvocation.SpecialMelee;
+                        break;
+                    case UltimateInvocation.RangeZone:
+                        Special = UltimateInvocation.SpecialRange;
+                        break;
+                    case UltimateInvocation.AssaultZone:
+                        Special = UltimateInvocation.SpecialAssault;
+                        break;
+                }
+                StartCoroutine(Utility.Invocation(Owner, zoneSelected, type, 1, Special));
             }
         }
-        else SwitchTurn();
-
+        else
+        {
+            SwitchTurn();
+        }
     }
 
     private IEnumerator DestroyMonsterWithHigherOrLessAtk(bool bigger)
@@ -402,14 +463,112 @@ public class Gwent : MonoBehaviour
         {
             foreach (var item in extremeAtkMonsters)
             {
-                Destroy(item);
+                if (!item.GetComponent<DisplayCard>().card.IsHero)
+                    Destroy(item);
             }
         }
         else
         {
-            Destroy(extremeAtkMonsters[0]);
+            if (!extremeAtkMonsters[0].GetComponent<DisplayCard>().card.IsHero)
+                Destroy(extremeAtkMonsters[0]);
         }
         yield return new WaitForSeconds(0.5f);
     }
 
+    public void PowerUpSanctuaryEffect(Player Owner, int amount)
+    {
+        switch (Owner.LastInvocation)
+        {
+            case UltimateInvocation.SpecialMelee:
+                foreach (var displayCard in Owner.MeleeZone.GetComponentsInChildren<DisplayCard>())
+                {
+                    if (!displayCard.card.IsHero)
+                        displayCard.card.Atk += amount;
+                }
+                break;
+            case UltimateInvocation.SpecialRange:
+                foreach (var displayCard in Owner.RangeZone.GetComponentsInChildren<DisplayCard>())
+                {
+                    if (!displayCard.card.IsHero)
+                        displayCard.card.Atk += amount;
+                }
+                break;
+            case UltimateInvocation.SpecialAssault:
+                foreach (var displayCard in Owner.AssaultZone.GetComponentsInChildren<DisplayCard>())
+                {
+                    if (!displayCard.card.IsHero)
+                        displayCard.card.Atk += amount;
+                }
+                break;
+        }
+    }
+
+    public void WeatherOffEffect()
+    {
+        Utility.ClearChildGameObject(Weather);
+        zonesSelectedNegate.Clear();
+    }
+
+    private IEnumerator InvocationEffect(Player Owner)
+    {
+        bool ContainSpecial = Owner.Hand.GetComponentsInChildren<DisplayCard>().Any(item => item.card.Type.Contains(Types.SpecialMelee) || item.card.Type.Contains(Types.SpecialRange) || item.card.Type.Contains(Types.SpecialAssault));
+
+        if (ContainSpecial)
+        {
+            Dictionary<UltimateInvocation, (string zoneName, Types type)> cardTypeToZoneMap = new Dictionary<UltimateInvocation, (string, Types)>
+        {
+            { UltimateInvocation.MeleeZone, (Player1.IsMyTurn ? "Special Melee" : "Special Melee 2", Types.SpecialMelee) },
+            { UltimateInvocation.RangeZone, (Player1.IsMyTurn ? "Special Range" : "Special Range 2", Types.SpecialRange) },
+            { UltimateInvocation.AssaultZone, (Player1.IsMyTurn ? "Special Assault" : "Special Assault 2", Types.SpecialAssault) }
+        };
+
+            if (cardTypeToZoneMap.ContainsKey(Owner.LastInvocation))
+            {
+                var (zoneName, type) = cardTypeToZoneMap[Owner.LastInvocation];
+
+                while (Owner.SelectedCards.Count() == 0 || Owner.SelectedCards.Last().GetComponent<DisplayCard>().card.Type.Contains(type))
+                {
+
+                    Owner.SelectedCards.Clear();
+                    yield return new WaitUntil(() => Owner.SelectedCards.Count() > 0);
+                }
+
+
+                GameObject zoneSelected = GameObject.Find(zoneName);
+                UltimateInvocation Special = UltimateInvocation.Another;
+                switch (Owner.LastInvocation)
+                {
+                    case UltimateInvocation.MeleeZone:
+                        Special = UltimateInvocation.SpecialMelee;
+                        break;
+                    case UltimateInvocation.RangeZone:
+                        Special = UltimateInvocation.SpecialRange;
+                        break;
+                    case UltimateInvocation.AssaultZone:
+                        Special = UltimateInvocation.SpecialAssault;
+                        break;
+                }
+                StartCoroutine(Utility.Invocation(Owner, zoneSelected, type, 1, Special));
+            }
+        }
+        else
+        {
+            SwitchTurn();
+        }
+    }
+
+    private IEnumerator ZoneSelectedNegateEffect(BoxInfo boxInfo, Player Owner)
+    {
+        yield return StartCoroutine(SelectZoneBox(boxInfo));
+
+        zonesSelectedNegate.Add(gwent.GetComponent<Gwent>().zonesSelect[0]);
+        zonesSelectedNegate.Add(gwent.GetComponent<Gwent>().zonesSelect[1]);
+    }
+    /*private IEnumerator ZoneSelectedInmune(BoxInfo boxInfo, Player Owner)
+    {
+        yield return StartCoroutine(SelectZoneBox(boxInfo));
+
+        zonesSelectedInmune.Add(gwent.GetComponent<Gwent>().zonesSelect[0]);
+        zonesSelectedInmune.Add(gwent.GetComponent<Gwent>().zonesSelect[1]);
+    }*/
 }

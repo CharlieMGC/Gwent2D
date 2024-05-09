@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Sprinz
   m_EditorClassIdentifier: 
   Atk: 8
-  Name: 
+  Name: Sprinz
   Type: 01000000
   Effect: 4
   IsPlayer1: 1
   IsHero: 0
+  Description: Destruya a la unidad con menos ataque del rival.

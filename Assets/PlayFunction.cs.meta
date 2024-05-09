@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 11a57af948b57eb4789195900a2acb4b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - gameCanvas: {fileID: 7858771231663528972, guid: d5dcb02ffbf35c040a90d5c14ce2c4c5, type: 3}
+  - menuCanvas: {fileID: 3444985099993667622, guid: 51aa01b20cca73546920256bff5e0f10, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

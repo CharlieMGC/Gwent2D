@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Utility : MonoBehaviour
 {
-    public static IEnumerator Invocation(Player Owner, GameObject zone, Types type, int amount = 10, UltimateInvocation ultimateInvocation = UltimateInvocation.SpecialOrClima)
+    public static IEnumerator Invocation(Player Owner, GameObject zone, Types type, int amount = 10, UltimateInvocation ultimateInvocation = UltimateInvocation.Another)
     {
         /* Debug.Log(zone.GetComponentsInChildren<GameObject>()); */
 
@@ -26,8 +26,14 @@ public class Utility : MonoBehaviour
                 {
                     Destroy(cardCurrent);
                 }
-                yield return tempGwent.StartCoroutine(tempGwent.ActivateEffect(cardCurrent.GetComponent<DisplayCard>()));
-                Debug.Log(ultimateInvocation);
+                if (Gwent.zonesSelectedNegate == null || !Gwent.zonesSelectedNegate.Contains(zone) || cardCurrent.GetComponent<DisplayCard>().card.IsHero)
+                {
+                    yield return tempGwent.StartCoroutine(tempGwent.ActivateEffect(cardCurrent.GetComponent<DisplayCard>()));
+                }
+                else
+                {
+                    Gwent.SwitchTurn();
+                }
             }
         }
 

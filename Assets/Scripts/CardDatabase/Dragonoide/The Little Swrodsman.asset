@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4f5bf2500d9d444818d695c7b993cf, type: 3}
   m_Name: The Little Swrodsman
   m_EditorClassIdentifier: 
-  Atk: 2
-  Name: 
+  Atk: 1
+  Name: The Little Swrodsman
   Type: 00000000
   Effect: 6
   IsPlayer1: 1
   IsHero: 0
+  Description: El ataque de esta carta aumenta  X2  igual a la cantidad de The Little
+    Swrodsman en el campo.

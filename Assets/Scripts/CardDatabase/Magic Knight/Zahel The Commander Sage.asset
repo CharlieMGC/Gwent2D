@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Zahel The Commander Sage
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Zahel The Commander Sage
   Type: 
   Effect: 21
   IsPlayer1: 0
   IsHero: 0
+  Description: Si el player gana o empata una ronda, por turno si usa una carta especial
+    puede usar una segunda carta especial en le turno.

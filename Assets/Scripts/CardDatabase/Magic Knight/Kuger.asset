@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Kuger
   m_EditorClassIdentifier: 
   Atk: 8
-  Name: 
+  Name: Kuger
   Type: 01000000
   Effect: 4
   IsPlayer1: 0
   IsHero: 1
+  Description: Destruya a la unidad con menos ataque del rival.

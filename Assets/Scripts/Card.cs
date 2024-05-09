@@ -13,6 +13,8 @@ public class Card : ScriptableObject
     public bool IsPlayer1;
     public bool IsHero;
     public Player Owner;
+    public string Description;
+
 
 }
 

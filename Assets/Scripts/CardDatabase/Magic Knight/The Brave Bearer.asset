@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: The Brave Bearer
   m_EditorClassIdentifier: 
   Atk: 4
-  Name: 
+  Name: The Brave Bearer
   Type: 000000000100000002000000
   Effect: 8
   IsPlayer1: 0
   IsHero: 0
+  Description: Selecciona el campo de uno de los jugadores e iguale el ataque de
+    todos los monstruos al promedio del ataque en su campo.

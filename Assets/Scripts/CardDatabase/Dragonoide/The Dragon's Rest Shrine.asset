@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: The Dragon's Rest Shrine
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: The Dragon's Rest Shrine
   Type: 030000000400000005000000
-  Effect: 13
+  Effect: 14
   IsPlayer1: 1
   IsHero: 0
+  Description: "Aumenta el ataque de las unidades que es\xE9n en la misma fila en
+    que esta carta fue activada."

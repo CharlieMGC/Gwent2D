@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Rune Spell Evocation
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Rune Spell Evocation
   Type: 030000000400000005000000
   Effect: 15
   IsPlayer1: 0
   IsHero: 0
+  Description: Aumenta el ataque en 3 puntos de las unidades que esten en la misma
+    fila que esta carta fue activada.

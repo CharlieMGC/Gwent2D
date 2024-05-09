@@ -184,3 +184,4 @@ MonoBehaviour:
   genericSprite: {fileID: 5310682501018633005, guid: 85179c29a72724b4896d3c99918d496b, type: 3}
   sprite: {fileID: -4541584194270870663, guid: 71bb307a3c5542b4ca9a00d28a9263de, type: 3}
   card: {fileID: 11400000, guid: 4e8f5a069387d564ebc3369816910040, type: 2}
+  cardView: {fileID: 0}

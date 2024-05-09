@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Brecha The One Who Remains
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Brecha the One Who Remains
   Type: 
   Effect: 20
   IsPlayer1: 1
   IsHero: 0
+  Description: Cada unidad en el campo gana 1 punto de ataque por cada unidad en
+    la misma zona.

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Arbal
   m_EditorClassIdentifier: 
   Atk: 7
-  Name: 
+  Name: Arbal
   Type: 01000000
   Effect: 1
   IsPlayer1: 0
   IsHero: 0
+  Description: Puedes activar desde la mano una carta especial.

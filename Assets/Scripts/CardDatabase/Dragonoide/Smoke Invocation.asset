@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Smoke Invocation
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Smoke Invocation
   Type: 00000000
   Effect: 0
   IsPlayer1: 1
   IsHero: 0
+  Description: "Una invocaci\xF3n que proviene del interior de muchos dragones, se
+    dice que son parte de la energ\xEDa espiritual de us invocador."

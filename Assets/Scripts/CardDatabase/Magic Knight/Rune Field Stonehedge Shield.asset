@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Rune Field Stonehedge Shield
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Rune Field Stonehedge Shield
   Type: 06000000
   Effect: 17
   IsPlayer1: 0
   IsHero: 0
+  Description: "Minetras este carta est\xE9 activada las unidades en la zona seleccionada
+    no son afectados por el resto de fectos del cartas."

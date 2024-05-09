@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Kaider
   m_EditorClassIdentifier: 
   Atk: 10
-  Name: 
+  Name: Kaider
   Type: 0000000001000000
   Effect: 12
   IsPlayer1: 1
   IsHero: 1
+  Description: Invoca otra unidad desde tu mano al campo.

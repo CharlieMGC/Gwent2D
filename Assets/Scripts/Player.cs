@@ -25,5 +25,9 @@ public enum UltimateInvocation
     MeleeZone,
     RangeZone,
     AssaultZone,
-    SpecialOrClima
+    SpecialMelee,
+    SpecialRange,
+    SpecialAssault,
+    Weather,
+    Another
 }

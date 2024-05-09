@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Blesh
   m_EditorClassIdentifier: 
   Atk: 9
-  Name: 
+  Name: Blesh
   Type: 00000000
   Effect: 3
   IsPlayer1: 0
   IsHero: 1
+  Description: Destruya a la unidad con mayor ataque del campo del rival.

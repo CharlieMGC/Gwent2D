@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Valkyrie Squadron
   m_EditorClassIdentifier: 
   Atk: 7
-  Name: 
+  Name: Valkyrie Squadron
   Type: 0000000001000000
   Effect: 0
   IsPlayer1: 1
   IsHero: 0
+  Description: "Junto a su comandante Affina son la gran \xE9lite del reino el honor
+    dragonificado."

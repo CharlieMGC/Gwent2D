@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Fire Eruption Rain
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Fire Eruption
   Type: 06000000
   Effect: 19
   IsPlayer1: 1
   IsHero: 0
+  Description: "Mientras esta carta est\xE9 activa, todas las unnidades que tengan
+    un aatque igual o menor a un numero aleatorio entre 3 y 7 ser\xE1n destruidos."

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Affina
   m_EditorClassIdentifier: 
   Atk: 8
-  Name: 
+  Name: Affina
   Type: 00000000
   Effect: 8
   IsPlayer1: 1
   IsHero: 1
+  Description: Selecciona el campo de uno de los jugadores e iguale el ataque de
+    todos los monstruos al promedio del ataque en su campo.

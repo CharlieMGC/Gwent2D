@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Hologram Knight
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Hologram Knight
   Type: 000000000100000002000000
+  Effect: 0
   IsPlayer1: 0
-  Position: 0
+  IsHero: 0
+  Description: el programa de entrenamiento de este holograma es usadoen los entrenamientoos
+    de los caballeros de la academia.

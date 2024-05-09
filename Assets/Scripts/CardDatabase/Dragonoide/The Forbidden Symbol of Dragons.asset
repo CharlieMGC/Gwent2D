@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: The Forbidden Symbol of Dragons
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: The Forbidden Symbol of Dragons
   Type: 030000000400000005000000
   Effect: 13
   IsPlayer1: 1
   IsHero: 0
+  Description: Puedes invocar 2 unidades que tengan el mismo nombre desde tu mano
+    al campo.

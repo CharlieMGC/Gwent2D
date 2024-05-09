@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Grobs the Greatsword
   m_EditorClassIdentifier: 
   Atk: 7
-  Name: 
+  Name: Grobs the Greatsword
   Type: 00000000
   Effect: 7
   IsPlayer1: 1
   IsHero: 0
+  Description: "Destruye todos las unidades que est\xE9n en la fila con menos cantidad
+    de unidades del rival."

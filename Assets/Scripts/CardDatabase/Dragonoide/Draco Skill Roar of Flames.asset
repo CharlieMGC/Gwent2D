@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Draco Skill Roar of Flames
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Draco Skill Roar of Flames
   Type: 030000000400000005000000
   Effect: 11
   IsPlayer1: 1
   IsHero: 0
+  Description: Destruya 1 carta en el campo.

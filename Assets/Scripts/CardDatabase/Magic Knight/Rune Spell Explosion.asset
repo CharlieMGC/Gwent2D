@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Rune Spell Explosion
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Rune Spell Explosion
   Type: 030000000400000005000000
   Effect: 11
   IsPlayer1: 0
   IsHero: 0
+  Description: Destruya 1 carta en el campo.

@@ -17,6 +17,6 @@ public class SpecialRangeOpponent : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.SpecialRange, 1));
+        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.SpecialRange, 1, UltimateInvocation.SpecialRange));
     }
 }

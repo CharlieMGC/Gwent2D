@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Esterin
   m_EditorClassIdentifier: 
   Atk: 3
-  Name: 
+  Name: Esterin
   Type: 000000000100000002000000
   Effect: 1
   IsPlayer1: 1
   IsHero: 0
+  Description: Puedes activar desde la mano una carta especial.

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Kirja the Grimoire
   m_EditorClassIdentifier: 
   Atk: 5
-  Name: 
+  Name: Kirja the Grimoire
   Type: 01000000
   Effect: 2
   IsPlayer1: 1
   IsHero: 0
+  Description: Activa una carta de clima.

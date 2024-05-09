@@ -18,3 +18,4 @@ MonoBehaviour:
   Effect: 11
   IsPlayer1: 0
   IsHero: 1
+  Description: Destruya una unidad en el campo.

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: The Dragon's Nest
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: The Dragon's Nest
   Type: 030000000400000005000000
   Effect: 9
   IsPlayer1: 1
   IsHero: 0
+  Description: "Selecciona una unidad en tu campo y devu\xE9lveo a la mano e invoca
+    un Smoke Invocation en la zona de melee. "

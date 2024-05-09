@@ -17,7 +17,7 @@ public class SpecialAssault : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.SpecialAssault, 1));
+        StartCoroutine(Utility.Invocation(Owner, gameObject, Types.SpecialAssault, 1, UltimateInvocation.SpecialAssault));
         
     }
 }

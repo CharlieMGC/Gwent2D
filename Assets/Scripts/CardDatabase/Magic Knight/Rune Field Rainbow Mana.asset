@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Rune Field Rainbow Mana
   m_EditorClassIdentifier: 
   Atk: 0
-  Name: 
+  Name: Rune Field Rainbow Mana
   Type: 06000000
   Effect: 16
   IsPlayer1: 0
   IsHero: 0
+  Description: "Selecciona una zona de unidad en el campo. Mientras esta carta est\xE9
+    activada aumenta el ataque de cada unidad en 2 puntos por cada unidad con nombres
+    diferentes en la zona."
