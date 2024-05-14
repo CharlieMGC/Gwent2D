@@ -15,7 +15,7 @@ MonoBehaviour:
   Atk: 0
   Name: Draco Skill Flapping Burst
   Type: 030000000400000005000000
-  Effect: 10
+  Effect: 11
   IsPlayer1: 1
   IsHero: 0
   Description: Destruya todos los climas en el campo.

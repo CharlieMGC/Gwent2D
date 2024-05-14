@@ -15,7 +15,7 @@ MonoBehaviour:
   Atk: 10
   Name: 
   Type: 0000000002000000
-  Effect: 11
+  Effect: 12
   IsPlayer1: 0
   IsHero: 1
   Description: Destruya una unidad en el campo.

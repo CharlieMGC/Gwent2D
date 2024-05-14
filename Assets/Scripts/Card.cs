@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Card")]
+[CreateAssetMenu(fileName = "New Card", menuName = "CardBase")]
 public class Card : ScriptableObject
 {
 
@@ -40,16 +40,12 @@ public enum Effects
     ClearRowLessUnit,
     BalanceAtkField,
     Decoy,
+    Decoy2,
     WeatherOff,
     DestroyCard,
     Invocation,
-    InvocationTwo,
     PowerUpSanctuary,
     PowerUpEvocation,
-    WeatherRainbow,
     WeatherStonehedge,
     WeatherSmoke,
-    WeatherEruption,
-    IncreaseAtkDraco,
-    ActivateTwoSpecial
 }

@@ -18,5 +18,5 @@ MonoBehaviour:
   Effect: 14
   IsPlayer1: 1
   IsHero: 0
-  Description: "Aumenta el ataque de las unidades que es\xE9n en la misma fila en
-    que esta carta fue activada."
+  Description: "Aumenta el ataque de las unidades que est\xE9n en la misma fila en
+    que esta carta fue activada en 2 puntos."

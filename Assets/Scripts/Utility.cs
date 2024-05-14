@@ -16,7 +16,18 @@ public class Utility : MonoBehaviour
             if (cardCurrent != null && cardCurrent.GetComponent<DisplayCard>().card.Type.Contains(type) && Owner.Hand.GetComponentsInChildren<DisplayCard>().Contains(cardCurrent.GetComponent<DisplayCard>()))
             {
                 Owner.LastInvocation = ultimateInvocation;
+                if (ultimateInvocation == UltimateInvocation.MeleeZone || ultimateInvocation == UltimateInvocation.RangeZone || ultimateInvocation == UltimateInvocation.AssaultZone)
+                {
+                    Owner.InvocationMonster++;
+                }
+                if (ultimateInvocation == UltimateInvocation.SpecialMelee || ultimateInvocation == UltimateInvocation.SpecialAssault || ultimateInvocation == UltimateInvocation.SpecialRange)
+                {
+                    Owner.InvocationMagic++;
+                }
+
+
                 cardCurrent.transform.SetParent(zone.transform, false);
+
                 Owner.SelectedCards.Clear();
                 //Gwent.SwitchTurn();
                 yield return new WaitForSeconds(0.5f);
@@ -34,6 +45,8 @@ public class Utility : MonoBehaviour
                 {
                     Gwent.SwitchTurn();
                 }
+                Gwent.Player1.SelectdMonster = false;
+                Gwent.Player2.SelectdMonster = false;
             }
         }
 
@@ -48,6 +61,8 @@ public class Utility : MonoBehaviour
         ClearChildGameObject(Owner.SpecialMelee);
         ClearChildGameObject(Owner.SpecialRange);
         ClearChildGameObject(Owner.SpecialAssault);
+        Owner.InvocationMagic = 0;
+        Owner.InvocationMonster = 0;
     }
     public static void ClearChildGameObject(GameObject item)
     {
@@ -58,6 +73,32 @@ public class Utility : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    public static void CheckColliderZone(GameObject gameObject, Player Owner)
+    {
+        try
+        {
+            if (Gwent.BoxInfo.GetComponent<BoxInfo>().Active)
+                gameObject.GetComponent<Collider2D>().enabled = false;
+            else if (gameObject.GetComponentsInChildren<DisplayCard>() != null && gameObject.GetComponentsInChildren<DisplayCard>().Count() > 0)
+            {
+                if (!Gwent.InitialDraw && Owner.SelectedCards != null && Owner.SelectedCards.Count > 0 && Owner.Hand.GetComponentsInChildren<DisplayCard>().Contains(Owner.SelectedCards.Last().GetComponent<DisplayCard>()))
+                {
+                    gameObject.GetComponent<Collider2D>().enabled = true;
+                }
+                else
+                {
+                    gameObject.GetComponent<Collider2D>().enabled = false;
+                }
+            }
+            else
+                gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+        catch
+        {
+        }
+
     }
 
 }

@@ -30,7 +30,7 @@ public class TotalAtkOpponent : MonoBehaviour
     {
         if (meleeAtk.GetComponent<Text>().text != "")
         {
-            return int.Parse(meleeAtk.GetComponent<Text>().text) + int.Parse(rangeAtk.GetComponent<Text>().text) + int.Parse(assaultAtk.GetComponent<Text>().text);
+            return int.Parse(meleeAtk.GetComponent<Text>().text) + int.Parse(rangeAtk.GetComponent<Text>().text) + int.Parse(assaultAtk.GetComponent<Text>().text)+ Gwent.Player2.InvocationMagic;
         }
         else return 0;
     }

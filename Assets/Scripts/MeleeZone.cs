@@ -22,6 +22,12 @@ public class MeleeZone : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        Utility.CheckColliderZone(gameObject, Owner);
+    }
+
+
     private void OnMouseDown()
     {
         StartCoroutine(Utility.Invocation(Owner, gameObject, Types.Melee, 10, UltimateInvocation.MeleeZone));

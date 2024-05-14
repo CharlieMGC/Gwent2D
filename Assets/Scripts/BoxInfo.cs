@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BoxInfo : MonoBehaviour
 {
     public Text Title;
+    public bool Active;
     public Button Button1;
     public Button Button2;
     public Button Button3;
@@ -22,11 +23,13 @@ public class BoxInfo : MonoBehaviour
         Button2.gameObject.SetActive(button2Text != null);
         Button3.GetComponentInChildren<Text>().text = button3Text;
         Button3.gameObject.SetActive(button3Text != null);
+        Active = true;
         gameObject.SetActive(true);
     }
 
     public void Hide()
     {
+        Active = false;
         gameObject.SetActive(false);
     }
 
@@ -35,27 +38,12 @@ public class BoxInfo : MonoBehaviour
         return result;
     }
 
-    public void OnButton1Click()
-    {
-        result = 0;
-    }
-
-    public void OnButton2Click()
-    {
-        result = 1;
-    }
-
-    public void OnButton3Click()
-    {
-        result = 2;
-    }
 
     private void Start()
     {
-        Button1.onClick.AddListener(OnButton1Click);
-        Button2.onClick.AddListener(OnButton2Click);
-        Button3.onClick.AddListener(OnButton3Click);
+
         Gwent.BoxInfo = gameObject;
         Hide();
     }
+
 }

@@ -18,4 +18,4 @@ MonoBehaviour:
   Effect: 3
   IsPlayer1: 0
   IsHero: 1
-  Description: Destruya a la unidad con mayor ataque del campo del rival.
+  Description: Destruya a la unidad con mayor ataque del campo.

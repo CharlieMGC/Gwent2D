@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4f5bf2500d9d444818d695c7b993cf, type: 3}
   m_Name: Destroyer
   m_EditorClassIdentifier: 
-  Atk: 8
+  Atk: 6
   Name: Destroyer
   Type: 02000000
   Effect: 7
   IsPlayer1: 0
   IsHero: 0
   Description: "Destruye todos las unidades que est\xE9n en la fila con menos cantidad
-    de unidades del rival."
+    de unidades."

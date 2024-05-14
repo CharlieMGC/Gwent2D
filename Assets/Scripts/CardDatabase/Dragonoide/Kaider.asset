@@ -15,7 +15,7 @@ MonoBehaviour:
   Atk: 10
   Name: Kaider
   Type: 0000000001000000
-  Effect: 12
+  Effect: 13
   IsPlayer1: 1
   IsHero: 1
   Description: Invoca otra unidad desde tu mano al campo.

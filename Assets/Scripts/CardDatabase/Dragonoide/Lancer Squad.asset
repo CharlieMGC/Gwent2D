@@ -18,5 +18,6 @@ MonoBehaviour:
   Effect: 6
   IsPlayer1: 1
   IsHero: 0
-  Description: El ataque de esta carta aumenta  X2  igual a la cantidad de Lancer
-    Squad en el campo.
+  Description: "Esta carta no es afecctada por los aumentos de ataque de otras cartas(escepto
+    de ella misma).Aumenta el atque de esta carta en 3 puntos igual al n\xFAmero
+    de \"Lancer Squad\" en el campo."

@@ -14,7 +14,10 @@ public class SpecialMeleeOpponent : MonoBehaviour
     }
 
     // Update is called once per frame
-
+    void Update()
+    {
+        Utility.CheckColliderZone(gameObject, Owner);
+    }
     private void OnMouseDown()
     {
         StartCoroutine(Utility.Invocation(Owner, gameObject, Types.SpecialMelee, 1, UltimateInvocation.SpecialMelee));

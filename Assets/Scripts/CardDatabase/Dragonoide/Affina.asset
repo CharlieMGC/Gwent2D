@@ -18,5 +18,6 @@ MonoBehaviour:
   Effect: 8
   IsPlayer1: 1
   IsHero: 1
-  Description: Selecciona el campo de uno de los jugadores e iguale el ataque de
-    todos los monstruos al promedio del ataque en su campo.
+  Description: "Seleccione el campo propio o del rival, el ataque de las unidades
+    del campo seleccionado ser\xE1 igual al promedio del ataque de unidades en el
+    campo seleccionado."

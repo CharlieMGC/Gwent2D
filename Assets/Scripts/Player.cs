@@ -16,7 +16,13 @@ public class Player
     public bool EndTurn { get; set; }
     public GameObject CardLeader { get; set; }
     public List<GameObject> SelectedCards { get; set; } = new List<GameObject> { };
+    public List<GameObject> SelectedCardsBoard { get; set; } = new List<GameObject> { };
     public UltimateInvocation LastInvocation { get; set; }
+    public bool SelectdMonster { get; set; }
+    public Dictionary<string, int[]> AtkUpByEqualsNames { get; set; } = new Dictionary<string, int[]>();
+    public int InvocationMagic { get; set; } = 0;
+    public int InvocationMonster { get; set; } = 0;
+
 
 }
 

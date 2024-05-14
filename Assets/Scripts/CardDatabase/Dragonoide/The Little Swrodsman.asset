@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: The Little Swrodsman
   m_EditorClassIdentifier: 
   Atk: 1
-  Name: The Little Swrodsman
+  Name: The Little Swordsman
   Type: 00000000
   Effect: 6
   IsPlayer1: 1
   IsHero: 0
-  Description: El ataque de esta carta aumenta  X2  igual a la cantidad de The Little
-    Swrodsman en el campo.
+  Description: "Esta carta no es afectada por los aumentos de ataque de otras cartas(excepto
+    de ella misma).Aumenta el atque de esta carta en 1 puntos igual al n\xFAmero
+    de \"The Little Swordsman\" en el campo."

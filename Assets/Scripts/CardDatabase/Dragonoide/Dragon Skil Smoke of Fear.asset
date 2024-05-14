@@ -15,8 +15,8 @@ MonoBehaviour:
   Atk: 0
   Name: Dragon Skill Smoke of Fear
   Type: 06000000
-  Effect: 18
+  Effect: 17
   IsPlayer1: 1
   IsHero: 0
   Description: "Mientras esta carta est\xE9 en el campo niega el efecto de todas
-    las cartas de unidad en el campo."
+    las unidades en la zona seleccionada."

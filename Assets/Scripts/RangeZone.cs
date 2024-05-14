@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,10 @@ public class RangeZone : MonoBehaviour
         Owner = Gwent.Player1;
         Gwent.Player1.RangeZone = gameObject;
 
+    }
+    void Update()
+    {
+        Utility.CheckColliderZone(gameObject, Owner);
     }
 
 

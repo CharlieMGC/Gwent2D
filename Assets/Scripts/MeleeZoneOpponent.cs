@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,10 @@ public class MeleeZoneOpponent : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        Utility.CheckColliderZone(gameObject, Owner);
+    }
 
     private void OnMouseDown()
     {

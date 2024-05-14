@@ -15,7 +15,7 @@ MonoBehaviour:
   Atk: 3
   Name: Rock Lunge Warrior
   Type: 0000000002000000
-  Effect: 11
+  Effect: 12
   IsPlayer1: 1
   IsHero: 0
   Description: Destruya una unidad  en el campo del adversario.

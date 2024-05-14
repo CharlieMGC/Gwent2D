@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,11 @@ public class AssaultZone : MonoBehaviour
     {
         Owner = Gwent.Player1;
         Gwent.Player1.AssaultZone = gameObject;
+    }
+
+    void Update()
+    {
+        Utility.CheckColliderZone(gameObject, Owner);
     }
 
 

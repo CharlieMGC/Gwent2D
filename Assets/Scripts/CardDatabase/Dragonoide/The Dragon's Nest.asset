@@ -18,5 +18,5 @@ MonoBehaviour:
   Effect: 9
   IsPlayer1: 1
   IsHero: 0
-  Description: "Selecciona una unidad en tu campo y devu\xE9lveo a la mano e invoca
-    un Smoke Invocation en la zona de melee. "
+  Description: "Selecciona una unidad en tu campo y devu\xE9lvelo a la mano e invoca
+    un \"Smoke Invocation\" en la zona de la unidad seleccionada. "
