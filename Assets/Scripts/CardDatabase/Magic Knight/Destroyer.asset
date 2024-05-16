@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Atk: 6
   Name: Destroyer
-  Type: 02000000
+  Type: 0100000002000000
   Effect: 7
   IsPlayer1: 0
   IsHero: 0

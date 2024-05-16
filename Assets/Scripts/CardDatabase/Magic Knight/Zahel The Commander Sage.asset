@@ -18,5 +18,5 @@ MonoBehaviour:
   Effect: 21
   IsPlayer1: 0
   IsHero: 0
-  Description: Aumenta el atk total en 1 punto cada vez que es activada 1 carta especial
-    en tu campo.
+  Description: Aumenta el ataque total en 1 punto cada vez que es activada 1 carta
+    especial en tu campo.

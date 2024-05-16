@@ -18,5 +18,5 @@ MonoBehaviour:
   Effect: 21
   IsPlayer1: 1
   IsHero: 0
-  Description: Las unidades en el campo ganan 1 punto de ataque cada vez que un monstruo
-    es invocado.
+  Description: Aumenta el ataque total en 1 punto cada vez que es activada 1 carta
+    unidad en tu campo.

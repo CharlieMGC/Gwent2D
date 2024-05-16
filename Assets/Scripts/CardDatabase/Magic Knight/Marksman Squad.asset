@@ -18,5 +18,6 @@ MonoBehaviour:
   Effect: 6
   IsPlayer1: 0
   IsHero: 0
-  Description: El ataque de esta carta aumenta  X2  igual a la cantidad de Marksman
-    Squad en el campo.
+  Description: "Esta carta no es afectada por los aumentos de ataque de otras cartas(excepto
+    de ella misma).Aumenta el atque de esta carta en 4 puntos igual al n\xFAmero
+    de \"Marksman Squad\" en el campo."

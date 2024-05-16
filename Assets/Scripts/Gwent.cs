@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +6,12 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Gwent : MonoBehaviour
 {
     private GameObject[] zonesSelect;
     public static bool InitialDraw;
+    public static bool UltimateVictoryPlayer2;
     public static List<GameObject> zonesSelectedNegate = new();
     public static List<GameObject> zonesSelectedInmune = new();
     public static GameObject gwent;
@@ -37,6 +35,8 @@ public class Gwent : MonoBehaviour
         Player2 = new Player();
         Player1.IsMyTurn = true;
         Player2.IsMyTurn = false;
+        Player1.Hand = GameObject.Find("Hand");
+        Player2.Hand = GameObject.Find("Oponent Hand");
     }
     private void Update()
     {
@@ -59,7 +59,6 @@ public class Gwent : MonoBehaviour
             Player1.SelectedCards.Clear();
             Player2.SelectedCards.Clear();
         }
-
     }
     private void Start()
     {
@@ -85,7 +84,7 @@ public class Gwent : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             DrawCard(player, cards);
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.10f);
         }
     }
 
@@ -100,24 +99,37 @@ public class Gwent : MonoBehaviour
                 drawCard.transform.SetParent(player.Hand.transform, false);
                 cards.RemoveAt(cardIndex);
             }
-            else
-            {
-                Debug.Log("La carta ya ha sido destruida.");
-            }
         }
     }
 
     private IEnumerator GameFlow()
     {
-        yield return StartCoroutine(DrawCards(Player1, Player1.Deck, 10));
-        yield return StartCoroutine(DrawCards(Player2, Player2.Deck, 10));
+        if (!UltimateVictoryPlayer2)
+        {
+            yield return StartCoroutine(DrawCards(Player1, Player1.Deck, 10));
+            yield return StartCoroutine(DrawCards(Player2, Player2.Deck, 10));
 
-        yield return StartCoroutine(ShowDialogAndReturnCards(Player1, "Player1", Player1.Deck));
-        Player1.IsMyTurn = false;
-        Player2.IsMyTurn = true;
-        yield return StartCoroutine(ShowDialogAndReturnCards(Player2, "Player2", Player2.Deck));
-        Player1.IsMyTurn = true;
-        Player2.IsMyTurn = false;
+            yield return StartCoroutine(ShowDialogAndReturnCards(Player1, "Player1", Player1.Deck));
+            Player1.IsMyTurn = false;
+            Player2.IsMyTurn = true;
+            yield return StartCoroutine(ShowDialogAndReturnCards(Player2, "Player2", Player2.Deck));
+            Player1.IsMyTurn = true;
+            Player2.IsMyTurn = false;
+        }
+        else
+        {
+            Player1.IsMyTurn = false;
+            Player2.IsMyTurn = true;
+            yield return StartCoroutine(DrawCards(Player2, Player2.Deck, 10));
+            yield return StartCoroutine(DrawCards(Player1, Player1.Deck, 10));
+
+            yield return StartCoroutine(ShowDialogAndReturnCards(Player2, "Player2", Player2.Deck));
+            Player1.IsMyTurn = true;
+            Player2.IsMyTurn = false;
+            yield return StartCoroutine(ShowDialogAndReturnCards(Player1, "Player1", Player1.Deck));
+            Player1.IsMyTurn = false;
+            Player2.IsMyTurn = true;
+        }
 
     }
 
@@ -141,18 +153,15 @@ public class Gwent : MonoBehaviour
         player.SelectedCards.Clear();
         yield return new WaitUntil(() => player.SelectedCards.Count == numCardsToReturn);
         List<GameObject> cardsToDestroy = new();
+
         foreach (var item in player.SelectedCards)
         {
-            // Crear una nueva instancia de la carta y añadirla al mazo
             player.Deck.Add(item);
-
-            // Añadir la carta original a la lista de cartas a destruir
             cardsToDestroy.Add(item);
         }
-        player.SelectedCards.Clear();
+
         foreach (var item in cardsToDestroy)
         {
-            // Destruir la carta original
             Destroy(item);
         }
         yield return new WaitForSeconds(0.5f);
@@ -176,6 +185,7 @@ public class Gwent : MonoBehaviour
                 {
                     boxInfo.Show("Player 1 ha ganado la ronda");
                 }
+                UltimateVictoryPlayer2 = false;
             }
             else if (int.Parse(totalAtkPlayer1.GetComponent<Text>().text) < int.Parse(totalAtkPlayer2.GetComponent<Text>().text))
             {
@@ -189,19 +199,35 @@ public class Gwent : MonoBehaviour
                 {
                     boxInfo.Show("Player 2 ha ganado la ronda");
                 }
+                UltimateVictoryPlayer2 = true;
             }
             else
             {
                 Player1.RoundWin++;
                 Player2.RoundWin++;
-                boxInfo.Show(" Empate ");
+                if (Player1.RoundWin > Player2.RoundWin)
+                {
+                    boxInfo.Show("Player 1 ha ganado el juego");
+                    Player1.IsMyTurn = false;
+                    Player2.IsMyTurn = false;
+                }
+                else if (Player1.RoundWin < Player2.RoundWin)
+                {
+                    boxInfo.Show("Player 2 ha ganado el juego");
+                    Player1.IsMyTurn = false;
+                    Player2.IsMyTurn = false;
+                }
+                else
+                {
+                    boxInfo.Show(" Empate ");
+                    UltimateVictoryPlayer2 = !UltimateVictoryPlayer2;
+                }
             }
             Player1.IsMyTurn = false;
             Player2.IsMyTurn = false;
             if (Player1.RoundWin < 2 & Player2.RoundWin < 2)
             {
                 gwent.GetComponent<Gwent>().StartCoroutine(gwent.GetComponent<Gwent>().ResetRound());
-
             }
         }
         else if (Player1.EndTurn)
@@ -239,7 +265,6 @@ public class Gwent : MonoBehaviour
         Player2.IsMyTurn = false;
 
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("Restar");
         Start();
 
         Player1.RoundWin = roundWinPlayer1;
@@ -308,10 +333,10 @@ public class Gwent : MonoBehaviour
                 PowerUpSanctuaryEffect(Owner, 4);
                 break;
             case Effects.WeatherStonehedge:
-                yield return StartCoroutine(ZoneSelectedInmune(boxInfo, Owner));
+                yield return StartCoroutine(ZoneSelectedInmune(boxInfo));
                 break;
             case Effects.WeatherSmoke:
-                yield return StartCoroutine(ZoneSelectedNegateEffect(boxInfo, Owner));
+                yield return StartCoroutine(ZoneSelectedNegateEffect(boxInfo));
                 break;
         }
         if (EndTurn)
@@ -332,7 +357,6 @@ public class Gwent : MonoBehaviour
         boxInfo.Show("Seleccione la zona", "Melee", "Range", "Assault");
         yield return new WaitUntil(() => boxInfo.GetResult() != -1);
         int tempSelect = boxInfo.GetResult();
-        Debug.Log(tempSelect);
         switch (tempSelect)
         {
             case 0:
@@ -368,7 +392,6 @@ public class Gwent : MonoBehaviour
         SelectPlayer = null;
         yield return StartCoroutine(SelectPlayerBox(boxInfo));
         int totalAtk = int.Parse(SelectPlayer == Player1 ? totalAtkPlayer1.text : totalAtkPlayer2.text);
-        Debug.Log(SelectPlayer);
         if (totalAtk != 0)
         {
 
@@ -406,7 +429,6 @@ public class Gwent : MonoBehaviour
         if (ContainWeather)
         {
             Owner.SelectedCards.Clear();
-            Debug.Log(Owner.Hand.GetComponentsInChildren<DisplayCard>().Count());
             yield return new WaitUntil(() => Owner.SelectedCards.Count() > 0 && Owner.SelectedCards[Owner.SelectedCards.Count() - 1].GetComponent<DisplayCard>().card.Type.Contains(Types.Weather));
             StartCoroutine(Utility.Invocation(Owner, Weather, Types.Weather, 3));
         }
@@ -541,14 +563,14 @@ public class Gwent : MonoBehaviour
         zonesSelectedInmune.Clear();
     }
 
-    private IEnumerator ZoneSelectedNegateEffect(BoxInfo boxInfo, Player Owner)
+    private IEnumerator ZoneSelectedNegateEffect(BoxInfo boxInfo)
     {
         yield return StartCoroutine(SelectZoneBox(boxInfo));
 
         zonesSelectedNegate.Add(gwent.GetComponent<Gwent>().zonesSelect[0]);
         zonesSelectedNegate.Add(gwent.GetComponent<Gwent>().zonesSelect[1]);
     }
-    private IEnumerator ZoneSelectedInmune(BoxInfo boxInfo, Player Owner)
+    private IEnumerator ZoneSelectedInmune(BoxInfo boxInfo)
     {
         yield return StartCoroutine(SelectZoneBox(boxInfo));
 
@@ -674,7 +696,6 @@ public class Gwent : MonoBehaviour
                 rival.SelectedCardsBoard.Clear();
                 yield return new WaitUntil(() => rival.SelectedCardsBoard.Count > 0);
             }
-            Debug.Log("No llegas verdad?");
             if (!rival.SelectedCardsBoard.Last().GetComponent<DisplayCard>().card.IsHero && !IsInmune(rival.SelectedCardsBoard.Last().GetComponent<DisplayCard>()))
                 Destroy(rival.SelectedCardsBoard.Last());
             SwitchTurn();
