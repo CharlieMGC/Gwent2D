@@ -42,10 +42,6 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
-*.pdb
-*.mdb
-*.opendb
-*.VC.db
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -70,4 +66,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore Visual Studio Code settings
 \.vscode
+
+# Do not ignore PDF and ELF files
+!*.pdf
+!*.elf
